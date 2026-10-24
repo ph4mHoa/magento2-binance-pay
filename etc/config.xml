@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) Joe Pham. Licensed under the MIT License, see LICENSE.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <joepham_binancepay>
+                <model>JoePhamBinancePayFacade</model>
+                <active>0</active>
+                <title>Binance Pay</title>
+                <payment_action>authorize</payment_action>
+                <is_gateway>1</is_gateway>
+                <can_initialize>1</can_initialize>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>0</can_use_internal>
+                <can_refund>1</can_refund>
+                <can_refund_partial_per_invoice>1</can_refund_partial_per_invoice>
+                <order_place_redirect_url>joepham_binancepay/checkout/redirect</order_place_redirect_url>
+                <api_url>https://bpay.binanceapi.com</api_url>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <api_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <allowspecific>0</allowspecific>
+                <debug>0</debug>
+                <paymentInfoKeys>binance_order_amount,binance_paid_with,binance_merchant_trade_no,binance_prepay_id,binance_transaction_id</paymentInfoKeys>
+                <privateInfoKeys>binance_merchant_trade_no,binance_prepay_id,binance_transaction_id</privateInfoKeys>
+            </joepham_binancepay>
+        </payment>
+    </default>
+</config>

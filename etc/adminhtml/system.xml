@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) Joe Pham. Licensed under the MIT License, see LICENSE.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="joepham_binancepay" translate="label comment" sortOrder="910" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Binance Pay</label>
+                <comment><![CDATA[Accept crypto through the Binance Pay Merchant API. Create the API key and secret in the <a href="https://merchant.binance.com/en" target="_blank" rel="noopener">Binance Merchant Portal</a>. The webhook URL is sent with every order, so nothing has to be set up in the portal.]]></comment>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="api_key" translate="label" type="obscure" sortOrder="30" showInDefault="1"
+                       showInWebsite="1">
+                    <label>API Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="api_secret" translate="label" type="obscure" sortOrder="40" showInDefault="1"
+                       showInWebsite="1">
+                    <label>API Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="merchant_trade_no_prefix" translate="label comment" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="1">
+                    <label>Order Number Prefix</label>
+                    <comment>Letters and digits only. Binance needs a unique order number per merchant account, so give staging and production different prefixes when they share one account.</comment>
+                    <validate>validate-alphanum</validate>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="70"
+                       showInDefault="1" showInWebsite="1">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="allowspecific">1</field>
+                    </depends>
+                </field>
+                <field id="min_order_total" translate="label" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Minimum Order Total</label>
+                    <validate>validate-zero-or-greater</validate>
+                </field>
+                <field id="max_order_total" translate="label" type="text" sortOrder="90" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Maximum Order Total</label>
+                    <validate>validate-zero-or-greater</validate>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="debug" translate="label comment" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Debug</label>
+                    <comment>Logs API requests and responses to var/log/joepham_binancepay.log. API keys are never logged.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_url" translate="label comment" type="text" sortOrder="120" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>API Base URL</label>
+                    <comment>Keep https://bpay.binanceapi.com. Change it only to test against the mock server in Test/Mock.</comment>
+                    <validate>validate-url</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

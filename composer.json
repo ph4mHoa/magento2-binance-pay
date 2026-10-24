@@ -1,0 +1,46 @@
+{
+    "name": "joepham/module-binance-pay",
+    "description": "Binance Pay payment gateway for Magento 2 / Adobe Commerce: accept USDT, USDC, BTC, BNB and other crypto through the Binance Pay Merchant API v3.",
+    "type": "magento2-module",
+    "license": "MIT",
+    "homepage": "https://github.com/ph4mHoa/magento2-binance-pay",
+    "keywords": [
+        "magento2",
+        "magento-2",
+        "adobe-commerce",
+        "binance-pay",
+        "binance",
+        "crypto-payment",
+        "usdt",
+        "usdc",
+        "payment-gateway"
+    ],
+    "authors": [
+        {
+            "name": "Joe Pham",
+            "homepage": "https://github.com/ph4mHoa"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/ph4mHoa/magento2-binance-pay/issues",
+        "source": "https://github.com/ph4mHoa/magento2-binance-pay"
+    },
+    "require": {
+        "php": "~8.1.0||~8.2.0||~8.3.0||~8.4.0",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-bcmath": "*",
+        "magento/framework": "^103.0",
+        "magento/module-checkout": "^100.4",
+        "magento/module-payment": "^100.4",
+        "magento/module-sales": "^103.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "JoePham\\BinancePay\\": ""
+        }
+    }
+}

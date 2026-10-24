@@ -1,0 +1,5 @@
+# Development tools and demo media stay out of Composer installs.
+/Test/Mock export-ignore
+/Test/E2E export-ignore
+/docs export-ignore
+/.gitattributes export-ignore

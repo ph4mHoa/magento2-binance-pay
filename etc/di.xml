@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) Joe Pham. Licensed under the MIT License, see LICENSE.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="JoePhamBinancePayFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">JoePham\BinancePay\Model\Config::METHOD_CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">JoePham\BinancePay\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">JoePhamBinancePayValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">JoePhamBinancePayValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">JoePhamBinancePayCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayGatewayConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">JoePham\BinancePay\Model\Config::METHOD_CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">JoePhamBinancePayGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">JoePhamBinancePayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayCountryValidator" type="Magento\Payment\Gateway\Validator\CountryValidator">
+        <arguments>
+            <argument name="config" xsi:type="object">JoePhamBinancePayGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayValidatorPool" type="Magento\Payment\Gateway\Validator\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="country" xsi:type="string">JoePhamBinancePayCountryValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="initialize" xsi:type="string">JoePham\BinancePay\Gateway\Command\InitializeCommand</item>
+                <item name="refund" xsi:type="string">JoePham\BinancePay\Gateway\Command\RefundCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="JoePham\BinancePay\Model\Config">
+        <arguments>
+            <argument name="gatewayConfig" xsi:type="object">JoePhamBinancePayGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Store front URLs, also when a refund is issued from the admin. -->
+    <type name="JoePham\BinancePay\Model\OrderRequestBuilder">
+        <arguments>
+            <argument name="urlBuilder" xsi:type="object">Magento\Framework\Url</argument>
+        </arguments>
+    </type>
+
+    <type name="JoePham\BinancePay\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">JoePhamBinancePayGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="JoePhamBinancePayLogHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/joepham_binancepay.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="JoePhamBinancePayLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">joepham_binancepay</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">JoePhamBinancePayLogHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="JoePham\BinancePay\Model\Api\Client">
+        <arguments>
+            <argument name="logger" xsi:type="object">JoePhamBinancePayLogger</argument>
+        </arguments>
+    </type>
+    <type name="JoePham\BinancePay\Model\OrderSync">
+        <arguments>
+            <argument name="logger" xsi:type="object">JoePhamBinancePayLogger</argument>
+        </arguments>
+    </type>
+    <type name="JoePham\BinancePay\Controller\Checkout\Redirect">
+        <arguments>
+            <argument name="logger" xsi:type="object">JoePhamBinancePayLogger</argument>
+        </arguments>
+    </type>
+    <type name="JoePham\BinancePay\Model\CheckoutFlow">
+        <arguments>
+            <argument name="logger" xsi:type="object">JoePhamBinancePayLogger</argument>
+        </arguments>
+    </type>
+    <type name="JoePham\BinancePay\Controller\Webhook\Index">
+        <arguments>
+            <argument name="logger" xsi:type="object">JoePhamBinancePayLogger</argument>
+        </arguments>
+    </type>
+    <type name="JoePham\BinancePay\Cron\SyncPendingOrders">
+        <arguments>
+            <argument name="logger" xsi:type="object">JoePhamBinancePayLogger</argument>
+        </arguments>
+    </type>
+</config>
