@@ -18,8 +18,12 @@ moved. Binance's real payment page looks different from the test one.</sub>
 
 ## 1. What you need
 
-- **A Binance Pay merchant account.** Apply in the [Binance Merchant portal](https://merchant.binance.com/en) with
-  your Binance account. Binance reviews the application before you can take payments.
+- **A Binance Pay merchant account, which needs a registered business.** Binance takes merchants only through a
+  Binance *entity* (company) account, not a personal one, and an email already used for a personal account cannot be
+  used for it. Sign up as an entity and complete the entity verification with your company documents, then apply as
+  a *Direct Merchant* in the [Binance Merchant portal](https://merchant.binance.com/en/onboarding) and sign the
+  Binance Pay agreement there. Binance reviews the application before you can take payments
+  ([Binance FAQ: How to apply for Binance Pay merchant](https://www.binance.com/en/support/faq/how-to-apply-for-binance-pay-merchant-7a49148912214defa816f14ee51b9f9f)).
 - **Your store online over HTTPS.** Binance tells your store about each payment at
   `https://<your store>/joepham_binancepay/webhook`, so the store must be reachable from the internet. A store that
   runs only on your own computer will not receive these messages.

@@ -67,7 +67,10 @@ sequenceDiagram
 
 - Magento Open Source or Adobe Commerce 2.4.x, PHP 8.1 to 8.4 with `bcmath`, `openssl` and `json`.
   Tested on Magento 2.4.8-p2 with PHP 8.3.
-- A Binance merchant account with Binance Pay and an API key: log in to the
+- A Binance merchant account with Binance Pay and an API key. Binance opens merchant accounts for businesses only:
+  the merchant application needs a verified Binance entity (company) account
+  ([Binance FAQ](https://www.binance.com/en/support/faq/how-to-apply-for-binance-pay-merchant-7a49148912214defa816f14ee51b9f9f)).
+  Once approved, log in to the
   [Binance Merchant Admin Portal](https://merchant.binance.com/en) and create an API identity key and secret. Copy
   the secret when it is shown; it is hashed afterwards. If you fill in *IP Access Restrictions* there, add your
   server's outgoing IP.
