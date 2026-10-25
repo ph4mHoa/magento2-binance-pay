@@ -6,6 +6,10 @@ API v3. Prices stay in your store currency (USD, EUR, CAD, VND and the other fia
 Binance converts the amount, the shopper pays on the Binance hosted checkout (QR code on desktop, Binance app on
 mobile), and the order is invoiced automatically once Binance confirms the payment.
 
+**Setting it up for the first time?** The [step-by-step setup guide](docs/setup-guide.md) walks a store owner
+through it with screenshots and a 2-minute video: where to get the API key, where to paste it in Magento, a $1 test
+order with a refund, and what shoppers see.
+
 | Shopper: pay with Binance Pay | Merchant: order details and online refund |
 | --- | --- |
 | ![Checkout with Binance Pay in Magento 2](docs/binance-pay-checkout.gif) | ![Refund a Binance Pay order from the Magento admin](docs/binance-pay-admin-refund.gif) |
@@ -95,11 +99,11 @@ Or copy the files to `app/code/JoePham/BinancePay` and run the same `bin/magento
 | Enabled | Show Binance Pay at checkout. |
 | Title | Name shown at checkout, e.g. "Binance Pay (USDT, USDC, BTC)". |
 | API Key / API Secret | From the Binance Merchant Admin Portal. Stored encrypted. |
-| Merchant Trade No Prefix | Letters and digits put before the order number in the Binance order number. Use a different prefix per environment when staging and production share one merchant account. |
+| Order Number Prefix | Letters and digits put before the order number in the Binance order number. Use a different prefix per environment when staging and production share one merchant account. |
 | Payment from Applicable Countries | All, or a list of countries. |
 | Minimum / Maximum Order Total | Optional limits. |
 | Debug | Logs API requests and responses to `var/log/joepham_binancepay.log`. |
-| API URL | Leave as `https://bpay.binanceapi.com`; change only to point at the test mock. |
+| API Base URL | Leave as `https://bpay.binanceapi.com`; change only to point at the test mock. |
 
 Nothing has to be set in the Binance portal for webhooks: each order and refund request carries the store's
 webhook URL (`https://<store>/joepham_binancepay/webhook`), which takes precedence over the one in the portal. The
@@ -116,8 +120,10 @@ Magento.
 
 ## Testing without a Binance account
 
-Binance Pay has no public sandbox, so the module ships a mock server that behaves like the Merchant API: it checks
-the HMAC-SHA512 request signatures, keeps orders, serves a test checkout page and sends RSA-signed webhooks.
+Binance Pay has no public sandbox for the Merchant API, so the module ships a mock server that behaves like it: it
+checks the HMAC-SHA512 request signatures, keeps orders, serves a test checkout page and sends RSA-signed webhooks.
+Before going live, also pay one small real order and refund it, as described in the
+[setup guide](docs/setup-guide.md#4-test-with-a-small-real-order-and-a-refund).
 
 ```bash
 # 1. Start the mock (it needs several workers: Magento calls back while handling a webhook)
