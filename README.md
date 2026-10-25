@@ -21,7 +21,7 @@ itself once Binance confirms it, and refunds are made from the Magento admin.
 
 **How you set it up**, with no coding once your developer has installed the extension:
 
-[![Watch the 2-minute setup video](docs/binance-pay-setup-video.png)](docs/binance-pay-setup-walkthrough.mp4)
+[![Watch the 2-minute setup video](docs/binance-pay-setup-video.png)](https://ph4mhoa.github.io/magento2-binance-pay/binance-pay-setup-walkthrough.mp4)
 
 The [step-by-step setup guide](docs/setup-guide.md) shows, with screenshots, where to get the API key, where to
 paste it in Magento, and how to check everything with a $1 order and a refund.

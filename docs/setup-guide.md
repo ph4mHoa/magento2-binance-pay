@@ -4,7 +4,7 @@ This guide is for store owners and needs no coding. It shows where to get your B
 in Magento, how to check everything with a $1 order and a refund, and what your shoppers see. Your developer installs
 the extension first ([installation](../README.md#installation)).
 
-[![Watch the setup video (2:07)](binance-pay-setup-video.png)](binance-pay-setup-walkthrough.mp4)
+[![Watch the setup video (2:07)](binance-pay-setup-video.png)](https://ph4mhoa.github.io/magento2-binance-pay/binance-pay-setup-walkthrough.mp4)
 
 <sub>The video and screenshots were made on a test store connected to the extension's test server, so no real money
 moved. Binance's real payment page looks different from the test one.</sub>
