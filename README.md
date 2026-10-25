@@ -1,18 +1,42 @@
 # Binance Pay Payment Gateway for Magento 2 (Adobe Commerce)
 
+Let shoppers pay your Magento 2 store with **Binance Pay**: they scan a QR code with the Binance app and pay in
+USDT, BTC, BNB or another coin Binance accepts. Prices stay in your store currency, each order is marked as paid by
+itself once Binance confirms it, and refunds are made from the Magento admin.
+
+> [!NOTE]
+> **Beta.** Tested end to end on Magento 2.4.8 against the bundled Binance Pay test server, not yet with real funds.
+> Binance Pay merchant accounts are for registered businesses. Before you go live, pay and refund one small real
+> order as shown in the [setup guide](docs/setup-guide.md#4-test-with-a-small-real-order-and-a-refund).
+
+![A shopper pays a Magento 2 order with Binance Pay](docs/binance-pay-checkout.gif)
+
+<sub>Recorded against the test server, so no real funds moved. Binance's real payment page looks different.</sub>
+
+**How shoppers pay**
+
+1. At checkout, they choose *Binance Pay* and place the order.
+2. Binance's payment page opens with the amount and a QR code. On a phone, they can continue in the Binance app.
+3. They confirm in the Binance app and come back to your store's "Thank you" page.
+
+**How you set it up**, with no coding once your developer has installed the extension:
+
+[![Watch the 2-minute setup video](docs/binance-pay-setup-video.png)](docs/binance-pay-setup-walkthrough.mp4)
+
+The [step-by-step setup guide](docs/setup-guide.md) shows, with screenshots, where to get the API key, where to
+paste it in Magento, and how to check everything with a $1 order and a refund.
+
+## What it does
+
 **Magento 2 Binance Pay** is an open-source payment gateway extension that lets a Magento 2 / Adobe Commerce 2.4
 store **accept USDT, USDC, BTC, BNB and other crypto through Binance Pay**, using the official Binance Pay Merchant
 API v3. Prices stay in your store currency (USD, EUR, CAD, VND and the other fiat currencies Binance supports);
 Binance converts the amount, the shopper pays on the Binance hosted checkout (QR code on desktop, Binance app on
 mobile), and the order is invoiced automatically once Binance confirms the payment.
 
-**Setting it up for the first time?** The [step-by-step setup guide](docs/setup-guide.md) walks a store owner
-through it with screenshots and a 2-minute video: where to get the API key, where to paste it in Magento, a $1 test
-order with a refund, and what shoppers see.
-
-| Shopper: pay with Binance Pay | Merchant: order details and online refund |
-| --- | --- |
-| ![Checkout with Binance Pay in Magento 2](docs/binance-pay-checkout.gif) | ![Refund a Binance Pay order from the Magento admin](docs/binance-pay-admin-refund.gif) |
+| Merchant: order details and online refund |
+| --- |
+| ![Refund a Binance Pay order from the Magento admin](docs/binance-pay-admin-refund.gif) |
 
 <sub>Recorded on Magento 2.4.8-p2 (Luma) against the bundled Binance Pay mock server, so no real funds moved. The real
 Binance checkout page looks different. MP4 versions: [checkout](docs/binance-pay-checkout.mp4),
